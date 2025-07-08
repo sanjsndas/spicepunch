@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpicePunch - Contact Us</title>
+    <style>
+        /* General Styles & Body */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5; /* Light background for contrast */
+            color: #212121; /* Smoke Charcoal for general text */
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background-color: #D32F2F; /* Fiery Red */
+            color: white;
+            padding: 1rem 0;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* Navigation */
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            background-color: #FF7043; /* Zest Orange */
+            padding: 0.75rem 0;
+            flex-wrap: wrap;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 5px 0;
+            transition: color 0.3s ease, border-bottom 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #FBC02D; /* Heat Meter Yellow */
+            border-bottom: 2px solid #FBC02D;
+        }
+
+        /* Main Content */
+        main {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 20px auto;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h2 {
+            color: #D32F2F; /* Fiery Red */
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2em;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: #D32F2F;
+        }
+
+        .contact-content {
+            padding: 0 20px;
+        }
+
+        .contact-content h3 {
+            color: #FF7043; /* Zest Orange */
+            margin-top: 25px;
+            margin-bottom: 10px;
+            font-size: 1.6em;
+        }
+
+        .contact-content p {
+            font-size: 0.95em;
+            color: #555;
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        .contact-content .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+        .contact-content .contact-item {
+            flex: 1 1 calc(50% - 20px); /* Two columns on larger screens */
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            min-width: 280px; /* Ensure items don't get too small */
+        }
+
+        .contact-content .contact-item h4 {
+            color: #212121;
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .contact-content .contact-item p {
+            margin: 5px 0;
+            font-size: 0.9em;
+        }
+
+        .contact-content .contact-item a {
+            color: #D32F2F;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .contact-content .contact-item a:hover {
+            text-decoration: underline;
+        }
+
+        .contact-form-section {
+            background-color: #f9f9f9;
+            padding: 30px;
+            margin-top: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .contact-form-section h3 {
+            text-align: center;
+            color: #212121;
+            margin-bottom: 20px;
+        }
+
+        .contact-form-section form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .contact-form-section label {
+            font-weight: bold;
+            color: #212121;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .contact-form-section input[type="text"],
+        .contact-form-section input[type="email"],
+        .contact-form-section textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+            box-sizing: border-box; /* Include padding in width */
+        }
+
+        .contact-form-section textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .contact-form-section button {
+            background-color: #D32F2F; /* Fiery Red */
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            align-self: flex-start; /* Align button to the left */
+        }
+
+        .contact-form-section button:hover {
+            background-color: #FF7043; /* Zest Orange */
+            transform: translateY(-2px);
+        }
+
+        .social-media-section {
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        .social-media-section h3 {
+            color: #212121;
+            margin-bottom: 20px;
+        }
+
+        .social-media-section .social-icons a {
+            display: inline-block;
+            margin: 0 15px;
+            color: #D32F2F;
+            font-size: 2.5em;
+            transition: color 0.3s ease;
+        }
+
+        .social-media-section .social-icons a:hover {
+            color: #FF7043;
+        }
+
+        /* Disclaimer, Customer Satisfaction, Address Sections */
+        .info-section {
+            background-color: #f9f9f9;
+            padding: 30px;
+            margin-top: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .info-section h3 {
+            color: #212121; /* Smoke Charcoal */
+            margin-bottom: 15px;
+            font-size: 1.8em;
+            text-align: center;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        .info-section h3::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 2px;
+            background-color: #FF7043;
+        }
+
+        .info-section p {
+            font-size: 0.9em;
+            color: #444;
+            text-align: justify;
+        }
+
+        .customer-satisfaction ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 15px;
+        }
+        .customer-satisfaction ul li {
+            background-color: #e6ffe6; /* Light green */
+            border-left: 5px solid #8BC34A; /* Fresh Lime Green */
+            padding: 10px 15px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+        }
+        .customer-satisfaction ul li strong {
+            color: #212121;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #212121; /* Smoke Charcoal */
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 40px;
+            font-size: 0.9em;
+        }
+
+        footer p {
+            margin: 5px 0;
+        }
+
+        footer a {
+            color: #FBC02D; /* Heat Meter Yellow */
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav ul li {
+                margin: 5px 0;
+            }
+
+            .contact-content .contact-item {
+                flex: 1 1 100%; /* Single column on small screens */
+            }
+
+            main {
+                margin: 10px;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>SpicePunch</h1>
+        <p>"Bold Flavors. No Apologies."</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="privacy.html">Privacy</a></li>
+            <li><a href="terms.html">Terms</a></li>
+            <li><a href="cookies.html">Cookies</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <h2>Contact Us</h2>
+        <div class="contact-content">
+            <p>At SpicePunch, we believe that communication is key to building a vibrant and engaged community of spice lovers. Whether you have a burning question about a recipe, a suggestion for a new spice challenge, feedback on your experience, or just want to share your latest fiery creation, we're here to listen. Your insights and enthusiasm are what fuel our passion for bold flavors and help us continuously improve our platform. We encourage you to reach out through the various channels provided below. Our dedicated team is committed to responding to your inquiries promptly and effectively, ensuring that your SpicePunch experience is as satisfying as our spiciest dishes. Don't hesitate to connect with us; we love hearing from our community!</p>
+
+            <h3>How to Reach SpicePunch</h3>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <h4>General Inquiries</h4>
+                    <p>For all general questions about SpicePunch, our mission, or anything that doesn't fit into a specific category, please use our general inquiry email. We strive to respond within 24-48 business hours. Your curiosity helps us grow, and we're always excited to share more about the world of bold flavors.</p>
+                    <p>Email: <a href="mailto:info@spicepunch.com">info@spicepunch.com</a></p>
+                    <p>Phone: +1-555-SPICEIT (General Line, available Mon-Fri, 9 AM - 5 PM EST)</p>
+                </div>
+
+                <div class="contact-item">
+                    <h4>Press & Media</h4>
+                    <p>Members of the press, journalists, and media outlets interested in features, interviews, or collaborations with SpicePunch can reach our media relations team here. We are eager to share our story, our passion for spice, and our vision for a world filled with bold culinary adventures. Please provide details about your publication and inquiry.</p>
+                    <p>Email: <a href="mailto:press@spicepunch.com">press@spicepunch.com</a></p>
+                </div>
+
+                <div class="contact-item">
+                    <h4>Partnerships & Collaborations</h4>
+                    <p>If you are a spice producer, a culinary expert, a food blogger, or a brand looking to collaborate with SpicePunch, we'd love to hear from you. We are always open to exciting partnerships that align with our brand values of bold flavors and no apologies. Let's explore how we can create something amazing together that resonates with our shared audience of spice enthusiasts.</p>
+                    <p>Email: <a href="mailto:partnerships@spicepunch.com">partnerships@spicepunch.com</a></p>
+                </div>
+
+                <div class="contact-item">
+                    <h4>Technical Support</h4>
+                    <p>Experiencing technical difficulties with the website, your account, or any of our interactive features? Our technical support team is here to help. Please provide as much detail as possible regarding the issue you're facing, including screenshots if applicable, to help us diagnose and resolve the problem quickly. Your smooth experience is our priority.</p>
+                    <p>Email: <a href="mailto:support@spicepunch.com">support@spicepunch.com</a></p>
+                </div>
+
+                <div class="contact-item">
+                    <h4>Customer Feedback & Suggestions</h4>
+                    <p>Your feedback is invaluable to us. If you have suggestions for new features, improvements to existing ones, or general comments about your experience with SpicePunch, please share them. We are constantly striving to enhance our platform and provide the best possible experience for our community. Every piece of feedback is reviewed and considered.</p>
+                    <p>Email: <a href="mailto:feedback@spicepunch.com">feedback@spicepunch.com</a></p>
+                </div>
+
+                <div class="contact-item">
+                    <h4>Recipe Submissions & Challenges</h4>
+                    <p>Think you have a recipe that packs a serious punch? Want to suggest an idea for our next "Punch Challenge"? We welcome submissions from our community! Share your boldest recipes or your most creative challenge ideas, and you might see them featured on SpicePunch. Make sure to include heat level, ingredients, and preparation steps.</p>
+                    <p>Email: <a href="mailto:recipes@spicepunch.com">recipes@spicepunch.com</a></p>
+                </div>
+            </div>
+
+            <div class="contact-form-section">
+                <h3>Send Us a Message</h3>
+                <p>Prefer to send us a direct message through our website? Fill out the form below, and we'll get back to you as soon as possible. Please ensure all fields are accurately filled to help us direct your inquiry to the right department and provide you with the most helpful response. We look forward to hearing from you and engaging with your questions, comments, and suggestions. This form is designed for your convenience, allowing you to quickly communicate with our team without leaving the site. We value every message and are committed to maintaining an open line of communication with our vibrant community. Your input helps us to grow and tailor our content and services to better meet your needs and expectations as a spice enthusiast. We appreciate your patience as we process your request.</p>
+                <form action="#" method="POST">
+                    <label for="name">Your Name:</label>
+                    <input type="text" id="name" name="name" required>
+
+                    <label for="email">Your Email:</label>
+                    <input type="email" id="email" name="email" required>
+
+                    <label for="subject">Subject:</label>
+                    <input type="text" id="subject" name="subject" required>
+
+                    <label for="message">Your Message:</label>
+                    <textarea id="message" name="message" required></textarea>
+
+                    <button type="submit">Send Message</button>
+                </form>
+            </div>
+
+            <div class="social-media-section">
+                <h3>Connect With Us on Social Media</h3>
+                <p>Join our vibrant community on social media to stay updated on the latest recipes, challenges, and spice trends. Share your spicy creations, interact with fellow chili heads, and become a part of the global SpicePunch family! We regularly post new content, host live Q&A sessions, and run exciting contests. Following us is the best way to ensure you don't miss out on any of the bold action. We love seeing your culinary adventures and engaging with your comments and photos. Tag us in your posts and use our hashtags to get featured!</p>
+                <div class="social-icons">
+                    <a href="#" aria-label="Facebook"><img src="https://placehold.co/40x40/D32F2F/FFFFFF?text=FB" alt="Facebook icon" style="vertical-align: middle; border-radius: 50%;"></a>
+                    <a href="#" aria-label="Instagram"><img src="https://placehold.co/40x40/D32F2F/FFFFFF?text=IG" alt="Instagram icon" style="vertical-align: middle; border-radius: 50%;"></a>
+                    <a href="#" aria-label="Twitter"><img src="https://placehold.co/40x40/D32F2F/FFFFFF?text=TW" alt="Twitter icon" style="vertical-align: middle; border-radius: 50%;"></a>
+                    <a href="#" aria-label="Pinterest"><img src="https://placehold.co/40x40/D32F2F/FFFFFF?text=PT" alt="Pinterest icon" style="vertical-align: middle; border-radius: 50%;"></a>
+                    <a href="#" aria-label="YouTube"><img src="https://placehold.co/40x40/D32F2F/FFFFFF?text=YT" alt="YouTube icon" style="vertical-align: middle; border-radius: 50%;"></a>
+                </div>
+                <p style="margin-top: 15px;">We're active on all major platforms, sharing daily doses of heat and flavor. Don't miss out on the fun!</p>
+            </div>
+        </div>
+
+        <section class="info-section disclaimer-section">
+            <h3>Disclaimer</h3>
+            <p>Welcome to SpicePunch! We are passionate about bold flavors and spicy experiences. However, please be aware that the recipes and spice-level guides provided on this platform are for informational and entertainment purposes only. The heat levels indicated (Mild Kick, Medium Burn, Full Punch) are subjective and based on general culinary understanding and our testing. Individual tolerance to capsaicin (the compound that makes chilies hot) varies significantly. What one person perceives as a "Mild Kick" might be a "Full Punch" for another. We strongly advise users to exercise caution, especially when attempting recipes with high heat levels or using extremely potent chilies like the Carolina Reaper, Ghost Pepper, or Trinidad Moruga Scorpion. Always handle hot peppers with gloves and avoid touching your eyes or other sensitive areas. Wash your hands thoroughly after handling chilies. If you have any known allergies, sensitivities, or pre-existing medical conditions (such as digestive issues, heart conditions, or respiratory problems), consult with a healthcare professional before consuming highly spicy foods. Spicy foods can exacerbate certain conditions. Children and individuals with low spice tolerance should be particularly careful. We are not responsible for any adverse reactions, discomfort, or health issues that may arise from consuming or preparing dishes from our recipes. All recipes should be prepared in a safe and hygienic environment, adhering to standard food safety practices. Always ensure ingredients are fresh and properly handled. The content on SpicePunch is not intended to be a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of your physician or other qualified health provider with any questions you may have regarding a medical condition. Never disregard professional medical advice or delay in seeking it because of something you have read on this website. By using this website and attempting our recipes, you acknowledge and agree that you do so at your own risk. SpicePunch and its creators, owners, affiliates, and employees shall not be held liable for any damages, injuries, or losses arising from the use of the information or recipes provided herein. We aim to provide delicious and exciting culinary experiences, but your safety and well-being are paramount. Please spice responsibly!</p>
+            <p>Further, while we strive for accuracy in our global spice education, the information on origins, traditional uses, and intensities is based on generally accepted culinary knowledge and research. Regional variations and specific cultural practices may exist, and our guides represent a general overview. Always cross-reference with multiple sources if you are conducting academic research or need precise historical details. The DIY spice blend suggestions are intended as starting points; feel free to adjust ratios and ingredients to suit your personal taste and desired flavor profile. Ingredient availability may vary by region, and substitutions may be necessary. Always ensure that any substitutions maintain food safety standards. We encourage adventurous cooks to experiment but within reasonable limits of safety and taste. Enjoy the journey of discovery, and may your culinary adventures be full of bold, fantastic flavors!</p>
+        </section>
+
+        <section class="info-section customer-satisfaction">
+            <h3>Customer Satisfaction</h3>
+            <p>At SpicePunch, your satisfaction is our ultimate goal. We are committed to providing the highest quality recipes, comprehensive spice education, and a vibrant community experience. We continuously strive to improve our platform and content based on your feedback.</p>
+            <ul>
+                <li><strong>Quality Content:</strong> Our recipes are rigorously tested by our team of spice enthusiasts and chefs to ensure they deliver on flavor and heat.</li>
+                <li><strong>User Experience:</strong> We design our website and features with you in mind, aiming for easy navigation, clear instructions, and engaging interactive elements.</li>
+                <li><strong>Community Support:</strong> We foster a welcoming and supportive community where spice lovers can share their creations, ask questions, and connect with like-minded individuals.</li>
+                <li><strong>Responsiveness:</strong> We value your input! If you have suggestions, encounter issues, or simply want to share your spicy triumphs, our team is ready to listen.</li>
+                <li><strong>Continuous Improvement:</strong> The world of spice is ever-evolving, and so are we. We constantly update our content with new recipes, spice profiles, and exciting challenges to keep your culinary journey fresh and exciting.</li>
+            </ul>
+            <p>We are dedicated to ensuring that every interaction you have with SpicePunch leaves you feeling inspired, satisfied, and ready for your next bold culinary adventure. Your feedback drives our innovation, so please don't hesitate to reach out through our contact page or community forums. Thank you for being a part of the SpicePunch family!</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 SpicePunch. All Rights Reserved.</p>
+        <p>Your Daily Dose of Heat & Flavor.</p>
+        <p><strong>SpicePunch Headquarters:</strong></p>
+        <p>123 Fiery Flavor Lane, Hot Springs City, Spiceland, 10001, Global</p>
+        <p>Email: <a href="mailto:info@spicepunch.com">info@spicepunch.com</a> | Phone: +1-555-SPICEIT</p>
+        <p>Follow us on: <a href="#">Facebook</a> | <a href="#">Instagram</a> | <a href="#">Twitter</a></p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpicePunch - Bold Recipes</title>
+    <style>
+        /* General Styles & Body */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5; /* Light background for contrast */
+            color: #212121; /* Smoke Charcoal for general text */
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background-color: #D32F2F; /* Fiery Red */
+            color: white;
+            padding: 1rem 0;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* Navigation */
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            background-color: #FF7043; /* Zest Orange */
+            padding: 0.75rem 0;
+            flex-wrap: wrap;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 5px 0;
+            transition: color 0.3s ease, border-bottom 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #FBC02D; /* Heat Meter Yellow */
+            border-bottom: 2px solid #FBC02D;
+        }
+
+        /* Main Content */
+        main {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 20px auto;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h2 {
+            color: #D32F2F; /* Fiery Red */
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2em;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: #D32F2F;
+        }
+
+        .recipe-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .recipe-card {
+            border: 1px solid #eee;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background-color: #fff;
+        }
+
+        .recipe-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .recipe-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .recipe-content {
+            padding: 20px;
+        }
+
+        .recipe-content h3 {
+            color: #FF7043; /* Zest Orange */
+            margin-top: 0;
+            font-size: 1.5em;
+        }
+
+        .recipe-content p {
+            font-size: 0.95em;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .heat-meter {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .heat-meter span {
+            font-weight: bold;
+            margin-right: 10px;
+            color: #212121;
+        }
+
+        .heat-meter .level {
+            height: 10px;
+            width: 100%;
+            background-color: #eee;
+            border-radius: 5px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .heat-meter .level-fill {
+            height: 100%;
+            border-radius: 5px;
+        }
+
+        .heat-meter .mild { background-color: #8BC34A; width: 33%; } /* Fresh Lime Green */
+        .heat-meter .medium { background-color: #FBC02D; width: 66%; } /* Heat Meter Yellow */
+        .heat-meter .full { background-color: #D32F2F; width: 100%; } /* Fiery Red */
+
+        .btn-view-recipe {
+            display: inline-block;
+            background-color: #D32F2F; /* Fiery Red */
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-view-recipe:hover {
+            background-color: #FF7043; /* Zest Orange */
+        }
+
+        /* Disclaimer, Customer Satisfaction, Address Sections */
+        .info-section {
+            background-color: #f9f9f9;
+            padding: 30px;
+            margin-top: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .info-section h3 {
+            color: #212121; /* Smoke Charcoal */
+            margin-bottom: 15px;
+            font-size: 1.8em;
+            text-align: center;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        .info-section h3::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 2px;
+            background-color: #FF7043;
+        }
+
+        .info-section p {
+            font-size: 0.9em;
+            color: #444;
+            text-align: justify;
+        }
+
+        .customer-satisfaction ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 15px;
+        }
+        .customer-satisfaction ul li {
+            background-color: #e6ffe6; /* Light green */
+            border-left: 5px solid #8BC34A; /* Fresh Lime Green */
+            padding: 10px 15px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+        }
+        .customer-satisfaction ul li strong {
+            color: #212121;
+        }
+
+
+        /* Footer */
+        footer {
+            background-color: #212121; /* Smoke Charcoal */
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 40px;
+            font-size: 0.9em;
+        }
+
+        footer p {
+            margin: 5px 0;
+        }
+
+        footer a {
+            color: #FBC02D; /* Heat Meter Yellow */
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav ul li {
+                margin: 5px 0;
+            }
+
+            .recipe-grid {
+                grid-template-columns: 1fr;
+            }
+
+            main {
+                margin: 10px;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>SpicePunch</h1>
+        <p>"Bold Flavors. No Apologies."</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="privacy.html">Privacy</a></li>
+            <li><a href="terms.html">Terms</a></li>
+            <li><a href="cookies.html">Cookies</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <h2>Spicy Recipe Library</h2>
+        <div class="recipe-grid">
+            <div class="recipe-card">
+                <img src="p1.webp" alt="Fiery Dragon Curry">
+                <div class="recipe-content">
+                    <h3>Fiery Dragon Curry</h3>
+                    <p>Experience an intense explosion of flavor with our signature Fiery Dragon Curry. This dish combines exotic spices with the searing heat of ghost peppers, tempered by creamy coconut milk and tender chicken. Perfect for those who crave a truly unforgettable culinary adventure. Each bite is a journey through a landscape of vibrant tastes, from the initial burst of heat to the lingering warmth of aromatic spices. We've meticulously balanced the ingredients to ensure depth of flavor alongside the powerful kick. The preparation involves layering various chilies, including the formidable Carolina Reaper for an extra punch, and slow-cooking to allow the flavors to meld perfectly. This is not just a meal; it's a statement. It's for the brave, the bold, and the unapologetic spice enthusiast. Enjoy with caution and plenty of water!</p>
+                    <p>Ingredients: Chicken breast, ghost peppers, Carolina Reaper (optional), coconut milk, ginger, garlic, turmeric, cumin, coriander, star anise, cardamom, cinnamon, fresh chilies, cilantro, lime. </p>
+                    <div class="heat-meter">
+                        <span>Heat Level:</span>
+                        <div class="level"><div class="level-fill full"></div></div>
+                    </div>
+                    <a href="#" class="btn-view-recipe">View Recipe</a>
+                </div>
+            </div>
+
+            <div class="recipe-card">
+                <img src="p2.webp" alt="Zesty Lime Chili Shrimp">
+                <div class="recipe-content">
+                    <h3>Zesty Lime Chili Shrimp</h3>
+                    <p>Bright, tangy, and with a delightful kick, our Zesty Lime Chili Shrimp is a refreshing dish that doesn't hold back on flavor. Succulent shrimp are marinated in a vibrant blend of lime, garlic, and serrano chilies, then quickly pan-fried to perfection. This recipe is an ode to the fresh and zesty side of spice, proving that heat can be invigorating without being overwhelming. The interplay between the citrus and the chili creates a symphony of taste that dances on your palate. It’s light, healthy, and incredibly satisfying, perfect for a quick weeknight meal or a dazzling appetizer for guests. The key is fresh ingredients and quick cooking to maintain the shrimp's tender texture. Consider pairing it with a light salad or some quinoa for a complete and balanced meal. The vibrant colors of this dish are as appealing as its flavors.</p>
+                    <p>Ingredients: Fresh shrimp, lime juice, serrano chilies, garlic, cilantro, olive oil, a pinch of sugar, salt, black pepper. </p>
+                    <div class="heat-meter">
+                        <span>Heat Level:</span>
+                        <div class="level"><div class="level-fill medium"></div></div>
+                    </div>
+                    <a href="#" class="btn-view-recipe">View Recipe</a>
+                </div>
+            </div>
+
+            <div class="recipe-card">
+                <img src="p3.webp" alt="Smoky Chipotle BBQ Ribs">
+                <div class="recipe-content">
+                    <h3>Smoky Chipotle BBQ Ribs</h3>
+                    <p>Indulge in the rich, deep flavors of our Smoky Chipotle BBQ Ribs. Slow-cooked to fall-off-the-bone tenderness, these ribs are coated in a homemade BBQ sauce infused with the earthy, smoky heat of chipotle peppers. This recipe is a testament to the versatility of spice, demonstrating how it can add warmth and complexity without aggressive heat. The smokiness from the chipotle creates a comforting depth that is simply irresistible. Perfect for a backyard barbecue or a hearty family dinner, these ribs will become a staple in your bold-flavor repertoire. The slow-cooking process ensures maximum tenderness, allowing the meat to absorb all the wonderful flavors of the rub and sauce. Pair them with creamy coleslaw and cornbread for a true Southern-inspired feast. The aroma alone will bring everyone to the table!</p>
+                    <p>Ingredients: Pork ribs, chipotle peppers in adobo, brown sugar, apple cider vinegar, smoked paprika, garlic powder, onion powder, mustard, ketchup. </p>
+                    <div class="heat-meter">
+                        <span>Heat Level:</span>
+                        <div class="level"><div class="level-fill mild"></div></div>
+                    </div>
+                    <a href="#" class="btn-view-recipe">View Recipe</a>
+                </div>
+            </div>
+
+            <div class="recipe-card">
+                <img src="p4.webp" alt="Spicy Kung Pao Noodles">
+                <div class="recipe-content">
+                    <h3>Spicy Kung Pao Noodles</h3>
+                    <p>Dive into a bowl of our electrifying Spicy Kung Pao Noodles! This classic gets a SpicePunch twist with an extra dose of Sichuan peppercorns and dried chilies, delivering that signature "mala" numbing and spicy sensation. Loaded with tender chicken, crunchy peanuts, and crisp vegetables, it's a dynamic and incredibly satisfying meal. The balance of savory, sweet, and intensely spicy flavors makes this dish addictive. It’s not just about the heat; it’s about the unique tingling sensation that makes you crave more. Perfect for a quick and flavorful weeknight dinner when you need a serious flavor boost. The interplay of textures – the chewiness of the noodles, the crunch of the peanuts, and the tender chicken – provides a delightful eating experience. This is authentic, bold Chinese-American cuisine at its best.</p>
+                    <p>Ingredients: Egg noodles, chicken breast, dried red chilies, Sichuan peppercorns, peanuts, bell peppers, soy sauce, rice vinegar, hoisin sauce, cornstarch, garlic, ginger. </p>
+                    <div class="heat-meter">
+                        <span>Heat Level:</span>
+                        <div class="level"><div class="level-fill full"></div></div>
+                    </div>
+                    <a href="#" class="btn-view-recipe">View Recipe</a>
+                </div>
+            </div>
+
+            <div class="recipe-card">
+                <img src="p5.webp" alt="Green Chili Chicken Enchiladas">
+                <div class="recipe-content">
+                    <h3>Green Chili Chicken Enchiladas</h3>
+                    <p>A comforting classic with a vibrant kick! Our Green Chili Chicken Enchiladas feature shredded chicken enrobed in a rich, tangy, and moderately spicy green chili sauce, rolled in soft tortillas, and baked to cheesy perfection. This recipe offers a delightful balance of creamy texture and the fresh, earthy heat of green chilies. It’s soul food with a punch, perfect for family dinners or entertaining. The sauce, made from roasted green chilies, provides a nuanced heat that builds gently, allowing all the other flavors to shine through. The melted cheese on top adds a layer of irresistible indulgence. This dish is versatile and can be made ahead of time, making it excellent for meal prep or gatherings. Serve with a dollop of sour cream and a sprinkle of fresh cilantro for a complete experience.</p>
+                    <p>Ingredients: Cooked chicken, corn tortillas, green chilies (canned or roasted fresh), Monterey Jack cheese, chicken broth, sour cream, onion, garlic, cumin, oregano. </p>
+                    <div class="heat-meter">
+                        <span>Heat Level:</span>
+                        <div class="level"><div class="level-fill medium"></div></div>
+                    </div>
+                    <a href="#" class="btn-view-recipe">View Recipe</a>
+                </div>
+            </div>
+
+            <div class="recipe-card">
+                <img src="p6.webp" alt="Habanero Mango Salsa">
+                <div class="recipe-content">
+                    <h3>Habanero Mango Salsa</h3>
+                    <p>Sweet, fruity, and intensely hot – our Habanero Mango Salsa is a flavor explosion that will awaken your senses! Ripe mangoes provide a tropical sweetness that beautifully contrasts with the fiery kick of fresh habanero peppers. Red onion, cilantro, and lime juice add zesty freshness, making this salsa perfect for topping grilled fish, chicken, or simply enjoying with crispy tortilla chips. It's a vibrant, refreshing, and unapologetically bold condiment. The unique floral notes of the habanero combine with the tropical sweetness of mango for a truly unforgettable taste. This salsa is not just a side; it's a centerpiece of flavor. Be warned: the habanero brings a significant heat, but it’s balanced by the fruit. A fantastic addition to any summer spread or barbecue. </p>
+                    <p>Ingredients: Fresh mangoes, habanero peppers, red onion, cilantro, lime juice, salt. </p>
+                    <div class="heat-meter">
+                        <span>Heat Level:</span>
+                        <div class="level"><div class="level-fill full"></div></div>
+                    </div>
+                    <a href="#" class="btn-view-recipe">View Recipe</a>
+                </div>
+            </div>
+
+            <div class="recipe-card">
+                <img src="p7.webp" alt="Spicy Miso Ramen">
+                <div class="recipe-content">
+                    <h3>Spicy Miso Ramen</h3>
+                    <p>Warm your soul and ignite your palate with our Spicy Miso Ramen. This hearty bowl features a rich, umami-packed miso broth infused with chili oil and Gochujang, topped with tender pork belly, perfectly soft-boiled eggs, spring onions, and nori. It's comfort food with a serious punch, offering layers of complex flavors and satisfying textures. The deep savory notes of the miso are perfectly complemented by the spicy kick, creating a truly nourishing and invigorating experience. This ramen isn't just a meal; it's an adventure in a bowl. Each component is carefully prepared to ensure maximum flavor and authenticity. It’s perfect for a chilly evening or whenever you need a hearty, flavorful pick-me-up. The broth is the star here, simmered to perfection to extract all the deliciousness.</p>
+                    <p>Ingredients: Ramen noodles, pork belly, miso paste, chili oil, Gochujang, chicken or vegetable broth, soy sauce, mirin, soft-boiled eggs, scallions, nori. </p>
+                    <div class="heat-meter">
+                        <span>Heat Level:</span>
+                        <div class="level"><div class="level-fill medium"></div></div>
+                    </div>
+                    <a href="#" class="btn-view-recipe">View Recipe</a>
+                </div>
+            </div>
+
+            <div class="recipe-card">
+                <img src="p8.webp" alt="Black Pepper Beef Stir-fry">
+                <div class="recipe-content">
+                    <h3>Black Pepper Beef Stir-fry</h3>
+                    <p>A classic Chinese-American dish elevated with a robust peppery punch! Our Black Pepper Beef Stir-fry features tender slices of beef, crisp bell peppers, and onions coated in a glossy, savory sauce dominated by the bold aroma and subtle heat of freshly cracked black peppercorns. This recipe is all about dynamic wok-fried flavors and textures, with the black pepper providing an invigorating warmth rather than fiery heat. It’s quick to make, incredibly satisfying, and pairs perfectly with steamed rice. The key is high heat and quick cooking to ensure the beef remains tender and the vegetables retain their crunch. This dish is a fantastic example of how a single spice can define the character of an entire meal. Enjoy the irresistible aroma and satisfying crunch!</p>
+                    <p>Ingredients: Beef sirloin, bell peppers (various colors), onion, garlic, ginger, black peppercorns, soy sauce, oyster sauce, sugar, cornstarch, rice wine vinegar. </p>
+                    <div class="heat-meter">
+                        <span>Heat Level:</span>
+                        <div class="level"><div class="level-fill mild"></div></div>
+                    </div>
+                    <a href="#" class="btn-view-recipe">View Recipe</a>
+                </div>
+            </div>
+
+            <div class="recipe-card">
+                <img src="p9.webp" alt="Spicy Chicken Adobo">
+                <div class="recipe-content">
+                    <h3>Spicy Chicken Adobo</h3>
+                    <p>Take your taste buds on a journey to the Philippines with our Spicy Chicken Adobo. This beloved national dish gets a fiery upgrade with the addition of bird's eye chilies, perfectly complementing the rich, tangy, and savory notes of soy sauce, vinegar, garlic, and peppercorns. The chicken is braised until incredibly tender, absorbing all the deep, complex flavors of the sauce. It's a comforting, aromatic, and deeply satisfying dish that is perfect with steamed rice. The combination of sour and salty, with a developing heat, makes this dish endlessly craveable. Each spoonful of sauce is a revelation, coating the tender chicken in pure deliciousness. This is a classic for a reason, and our spicy twist makes it even more exciting.</p>
+                    <p>Ingredients: Chicken pieces, soy sauce, white vinegar, garlic cloves, whole black peppercorns, bay leaves, bird's eye chilies (siling labuyo), cooking oil. </p>
+                    <div class="heat-meter">
+                        <span>Heat Level:</span>
+                        <div class="level"><div class="level-fill medium"></div></div>
+                    </div>
+                    <a href="#" class="btn-view-recipe">View Recipe</a>
+                </div>
+            </div>
+
+            <div class="recipe-card">
+                <img src="p10.webp" alt="Spicy Kimchi Stew">
+                <div class="recipe-content">
+                    <h3>Spicy Kimchi Stew (Kimchi-jjigae)</h3>
+                    <p>A quintessential Korean comfort food that packs a flavorful punch! Our Spicy Kimchi Stew is a bubbling pot of fermented kimchi, tender pork (or tofu), savory broth, and an array of vegetables, all brought together by the powerful heat of gochugaru (Korean chili flakes). It’s tangy, spicy, deeply savory, and incredibly warming, especially on a cold day. This stew offers a harmonious blend of sour, spicy, and umami, making it a truly addictive experience. The longer the kimchi ferments, the deeper the flavor of the stew. It’s surprisingly easy to make and incredibly versatile, allowing for various additions like mushrooms, onions, or other meats. Serve with a bowl of sticky rice and enjoy the vibrant flavors of Korea.</p>
+                    <p>Ingredients: Aged kimchi, pork belly (or firm tofu), gochugaru, gochujang, garlic, onion, spring onions, enoki mushrooms, firm tofu, anchovy broth (or vegetable broth), sesame oil. </p>
+                    <div class="heat-meter">
+                        <span>Heat Level:</span>
+                        <div class="level"><div class="level-fill full"></div></div>
+                    </div>
+                    <a href="#" class="btn-view-recipe">View Recipe</a>
+                </div>
+            </div>
+
+            <div class="recipe-card">
+                <img src="p11.webp" alt="Spicy Sriracha Brussels Sprouts">
+                <div class="recipe-content">
+                    <h3>Spicy Sriracha Brussels Sprouts</h3>
+                    <p>Transform often-maligned Brussels sprouts into a crispy, spicy, and utterly addictive side dish! Our Spicy Sriracha Brussels Sprouts are roasted until caramelized and tender-crisp, then tossed in a vibrant glaze of sriracha, honey, soy sauce, and lime. The combination of sweet, savory, and spicy creates a delightful balance that even vegetable skeptics will love. This recipe proves that healthy eating doesn't have to be bland; in fact, it can pack a serious flavor punch! The high heat roasting brings out the natural sweetness of the sprouts while giving them a fantastic texture. This side dish is versatile and can accompany almost any main course, from grilled meats to roasted vegetables. It's an excellent way to introduce more greens into your diet without sacrificing flavor. The slight char on the leaves adds another layer of deliciousness.</p>
+                    <p>Ingredients: Brussels sprouts, sriracha, honey, soy sauce, lime juice, olive oil, salt, black pepper, garlic powder. </p>
+                   
+                    <div class="heat-meter">
+                        <span>Heat Level:</span>
+                        <div class="level"><div class="level-fill medium"></div></div>
+                    </div>
+                    <a href="#" class="btn-view-recipe">View Recipe</a>
+                </div>
+            </div>
+
+            </div>
+
+        <section class="info-section disclaimer-section">
+            <h3>Disclaimer</h3>
+            <p>Welcome to SpicePunch! We are passionate about bold flavors and spicy experiences. However, please be aware that the recipes and spice-level guides provided on this platform are for informational and entertainment purposes only. The heat levels indicated (Mild Kick, Medium Burn, Full Punch) are subjective and based on general culinary understanding and our testing. Individual tolerance to capsaicin (the compound that makes chilies hot) varies significantly. What one person perceives as a "Mild Kick" might be a "Full Punch" for another. We strongly advise users to exercise caution, especially when attempting recipes with high heat levels or using extremely potent chilies like the Carolina Reaper, Ghost Pepper, or Trinidad Moruga Scorpion. Always handle hot peppers with gloves and avoid touching your eyes or other sensitive areas. Wash your hands thoroughly after handling chilies. If you have any known allergies, sensitivities, or pre-existing medical conditions (such as digestive issues, heart conditions, or respiratory problems), consult with a healthcare professional before consuming highly spicy foods. Spicy foods can exacerbate certain conditions. Children and individuals with low spice tolerance should be particularly careful. We are not responsible for any adverse reactions, discomfort, or health issues that may arise from consuming or preparing dishes from our recipes. All recipes should be prepared in a safe and hygienic environment, adhering to standard food safety practices. Always ensure ingredients are fresh and properly handled. The content on SpicePunch is not intended to be a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of your physician or other qualified health provider with any questions you may have regarding a medical condition. Never disregard professional medical advice or delay in seeking it because of something you have read on this website. By using this website and attempting our recipes, you acknowledge and agree that you do so at your own risk. SpicePunch and its creators, owners, affiliates, and employees shall not be held liable for any damages, injuries, or losses arising from the use of the information or recipes provided herein. We aim to provide delicious and exciting culinary experiences, but your safety and well-being are paramount. Please spice responsibly!</p>
+            <p>Further, while we strive for accuracy in our global spice education, the information on origins, traditional uses, and intensities is based on generally accepted culinary knowledge and research. Regional variations and specific cultural practices may exist, and our guides represent a general overview. Always cross-reference with multiple sources if you are conducting academic research or need precise historical details. The DIY spice blend suggestions are intended as starting points; feel free to adjust ratios and ingredients to suit your personal taste and desired flavor profile. Ingredient availability may vary by region, and substitutions may be necessary. Always ensure that any substitutions maintain food safety standards. We encourage adventurous cooks to experiment but within reasonable limits of safety and taste. Enjoy the journey of discovery, and may your culinary adventures be full of bold, fantastic flavors!</p>
+        </section>
+
+        <section class="info-section customer-satisfaction">
+            <h3>Customer Satisfaction</h3>
+            <p>At SpicePunch, your satisfaction is our ultimate goal. We are committed to providing the highest quality recipes, comprehensive spice education, and a vibrant community experience. We continuously strive to improve our platform and content based on your feedback.</p>
+            <ul>
+                <li><strong>Quality Content:</strong> Our recipes are rigorously tested by our team of spice enthusiasts and chefs to ensure they deliver on flavor and heat.</li>
+                <li><strong>User Experience:</strong> We design our website and features with you in mind, aiming for easy navigation, clear instructions, and engaging interactive elements.</li>
+                <li><strong>Community Support:</strong> We foster a welcoming and supportive community where spice lovers can share their creations, ask questions, and connect with like-minded individuals.</li>
+                <li><strong>Responsiveness:</strong> We value your input! If you have suggestions, encounter issues, or simply want to share your spicy triumphs, our team is ready to listen.</li>
+                <li><strong>Continuous Improvement:</strong> The world of spice is ever-evolving, and so are we. We constantly update our content with new recipes, spice profiles, and exciting challenges to keep your culinary journey fresh and exciting.</li>
+            </ul>
+            <p>We are dedicated to ensuring that every interaction you have with SpicePunch leaves you feeling inspired, satisfied, and ready for your next bold culinary adventure. Your feedback drives our innovation, so please don't hesitate to reach out through our contact page or community forums. Thank you for being a part of the SpicePunch family!</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 SpicePunch. All Rights Reserved.</p>
+        <p>Your Daily Dose of Heat & Flavor.</p>
+        <p><strong>SpicePunch Headquarters:</strong></p>
+        <p>123 Fiery Flavor Lane, Hot Springs City, Spiceland, 10001, Global</p>
+        <p>Email: <a href="mailto:info@spicepunch.com">info@spicepunch.com</a> | Phone: +1-555-SPICEIT</p>
+        <p>Follow us on: <a href="#">Facebook</a> | <a href="#">Instagram</a> | <a href="#">Twitter</a></p>
+    </footer>
+</body>
+</html>
